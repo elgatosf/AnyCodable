@@ -29,8 +29,8 @@ import Foundation
      let encoder = JSONEncoder()
      let json = try! encoder.encode(dictionary)
  */
-@frozen public struct AnyEncodable: Encodable {
-    public let value: Any
+@frozen public struct AnyEncodable: Encodable, Sendable {
+    public let value: any Sendable
 
     public init<T>(_ value: T?) {
         self.value = value ?? ()
@@ -39,7 +39,7 @@ import Foundation
 
 @usableFromInline
 protocol _AnyEncodable {
-    var value: Any { get }
+    var value: any Sendable { get }
     init<T>(_ value: T?)
 }
 
